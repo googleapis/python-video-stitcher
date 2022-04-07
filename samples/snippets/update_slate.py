@@ -31,7 +31,7 @@ from google.protobuf import field_mask_pb2 as field_mask
 
 
 def update_slate(project_number, location, slate_id, slate_uri):
-    """Creates a slate.
+    """Updates a slate.
     Args:
         project_number: The GCP project number.
         location: The location of the slate.

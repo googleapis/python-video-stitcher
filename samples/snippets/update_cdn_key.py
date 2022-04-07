@@ -40,7 +40,7 @@ def update_cdn_key(
     gcdn_private_key=None,
     akamai_token_key=None,
 ):
-    """Creates a Google Cloud or Akamai CDN key.
+    """Updates a Google Cloud or Akamai CDN key.
     Args:
         project_number: The GCP project number.
         location: The location of the CDN key.

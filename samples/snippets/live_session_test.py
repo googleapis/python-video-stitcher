@@ -27,7 +27,7 @@ import list_live_ad_tag_details
 project_number = os.environ["GOOGLE_CLOUD_PROJECT_NUMBER"]
 location = "us-central1"
 input_bucket_name = "cloud-samples-data/media/"
-input_video_file_name = "hls-live/manifest.m3u8"
+input_video_file_name = "hls-vod/manifest.m3u8"
 live_stream_uri = (
     f"https://storage.googleapis.com/{input_bucket_name}{input_video_file_name}"
 )
@@ -100,6 +100,6 @@ def test_live_session_operations(capsys):
     # ad_tag_details_name = f"projects/{project_number}/locations/{location}/liveSessions/{session_id}/liveAdTagDetails/{ad_tag_details_id}"
     # assert ad_tag_details_name in out
 
-    # get_live_ad_tag_details.get_live_ad_tag_details(project_number, location, session_id, ad_tag_details_id)
+    # get_live_ad_tag_detail.get_live_ad_tag_detail(project_number, location, session_id, ad_tag_details_id)
     # out, _ = capsys.readouterr()
     # assert ad_tag_details_name in out

@@ -14,12 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Google Cloud Video Stitcher sample for getting the specified ad tag detail for a live session.
+"""Google Cloud Video Stitcher sample for getting the specified stitch detail for a video on demand (VOD) session.
 Example usage:
-    python get_live_ad_tag_details.py --project_number <project-number> --location <location> --session_id <session-id> --ad_tag_details_id <ad-tag-details-id>
+    python get_vod_stitch_detail.py --project_number <project-number> --location <location> --session_id <session-id> --stitch_details_id <stitch-details-id>
 """
 
-# [START video_stitcher_get_live_ad_tag_details]
+# [START video_stitcher_get_vod_stitch_detail]
 
 import argparse
 
@@ -28,25 +28,25 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 
 
-def get_live_ad_tag_details(project_number, location, session_id, ad_tag_details_id):
-    """Gets the specified ad tag detail for a live session.
+def get_vod_stitch_detail(project_number, location, session_id, stitch_details_id):
+    """Gets the specified stitch detail for a VOD session.
     Args:
         project_number: The GCP project number.
         location: The location of the session.
-        session_id: The ID of the live session.
-        ad_tag_details_id: The id of the ad tag details."""
+        session_id: The ID of the VOD session.
+        stitch_details_id: The id of the stitch details."""
 
     client = VideoStitcherServiceClient()
 
-    name = client.live_ad_tag_detail_path(
-        project_number, location, session_id, ad_tag_details_id
+    name = client.vod_stitch_detail_path(
+        project_number, location, session_id, stitch_details_id
     )
-    response = client.get_live_ad_tag_detail(name=name)
-    print(f"Live ad tag details: {response.name}")
+    response = client.get_vod_stitch_detail(name=name)
+    print(f"VOD stitch details: {response.name}")
     return response
 
 
-# [END video_stitcher_get_live_ad_tag_details]
+# [END video_stitcher_get_vod_stitch_detail]
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -54,15 +54,15 @@ if __name__ == "__main__":
         "--project_number", help="Your Cloud project number.", required=True
     )
     parser.add_argument(
-        "--location", help="The location of the live session.", required=True
+        "--location", help="The location of the VOD session.", required=True
     )
     parser.add_argument(
-        "--session_id", help="The ID of the live session.", required=True
+        "--session_id", help="The ID of the VOD session.", required=True
     )
     parser.add_argument(
-        "--ad_tag_details_id", help="The ID of the ad tag details.", required=True
+        "--stitch_details_id", help="The ID of the stitch details.", required=True
     )
     args = parser.parse_args()
-    get_live_ad_tag_details(
-        args.project_number, args.location, args.session_id, args.ad_tag_details_id
+    get_vod_stitch_detail(
+        args.project_number, args.location, args.session_id, args.stitch_details_id
     )

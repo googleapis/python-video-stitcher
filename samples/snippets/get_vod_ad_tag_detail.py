@@ -16,10 +16,10 @@
 
 """Google Cloud Video Stitcher sample for getting the specified ad tag detail for a video on demand (VOD) session.
 Example usage:
-    python get_vod_ad_tag_details.py --project_number <project-number> --location <location> --session_id <session-id> --ad_tag_details_id <ad-tag-details-id>
+    python get_vod_ad_tag_detail.py --project_number <project-number> --location <location> --session_id <session-id> --ad_tag_details_id <ad-tag-details-id>
 """
 
-# [START video_stitcher_get_vod_ad_tag_details]
+# [START video_stitcher_get_vod_ad_tag_detail]
 
 import argparse
 
@@ -28,7 +28,7 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 
 
-def get_vod_ad_tag_details(project_number, location, session_id, ad_tag_details_id):
+def get_vod_ad_tag_detail(project_number, location, session_id, ad_tag_details_id):
     """Gets the specified ad tag detail for a VOD session.
     Args:
         project_number: The GCP project number.
@@ -46,7 +46,7 @@ def get_vod_ad_tag_details(project_number, location, session_id, ad_tag_details_
     return response
 
 
-# [END video_stitcher_get_vod_ad_tag_details]
+# [END video_stitcher_get_vod_ad_tag_detail]
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -63,6 +63,6 @@ if __name__ == "__main__":
         "--ad_tag_details_id", help="The ID of the ad tag details.", required=True
     )
     args = parser.parse_args()
-    get_vod_ad_tag_details(
+    get_vod_ad_tag_detail(
         args.project_number, args.location, args.session_id, args.ad_tag_details_id
     )

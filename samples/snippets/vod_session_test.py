@@ -15,9 +15,9 @@
 import os
 
 import create_vod_session
-import get_vod_ad_tag_details
+import get_vod_ad_tag_detail
 import get_vod_session
-import get_vod_stitch_details
+import get_vod_stitch_detail
 import list_vod_ad_tag_details
 import list_vod_stitch_details
 
@@ -64,7 +64,7 @@ def test_vod_session_operations(capsys):
     ad_tag_details_name = f"projects/{project_number}/locations/{location}/vodSessions/{session_id}/vodAdTagDetails/{ad_tag_details_id}"
     assert ad_tag_details_name in out
 
-    get_vod_ad_tag_details.get_vod_ad_tag_details(
+    get_vod_ad_tag_detail.get_vod_ad_tag_detail(
         project_number, location, session_id, ad_tag_details_id
     )
     out, _ = capsys.readouterr()
@@ -84,7 +84,7 @@ def test_vod_session_operations(capsys):
     stitch_details_name = f"projects/{project_number}/locations/{location}/vodSessions/{session_id}/vodStitchDetails/{stitch_details_id}"
     assert stitch_details_name in out
 
-    get_vod_stitch_details.get_vod_stitch_details(
+    get_vod_stitch_detail.get_vod_stitch_detail(
         project_number, location, session_id, stitch_details_id
     )
     out, _ = capsys.readouterr()
