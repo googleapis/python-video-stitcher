@@ -15,23 +15,25 @@
 #
 import abc
 from typing import Awaitable, Callable, Dict, Optional, Sequence, Union
-import pkg_resources
 
-import google.auth  # type: ignore
 import google.api_core
 from google.api_core import exceptions as core_exceptions
 from google.api_core import gapic_v1
 from google.api_core import retry as retries
+import google.auth  # type: ignore
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
-
-from google.cloud.video.stitcher_v1.types import ad_tag_details
-from google.cloud.video.stitcher_v1.types import cdn_keys
-from google.cloud.video.stitcher_v1.types import sessions
-from google.cloud.video.stitcher_v1.types import slates
-from google.cloud.video.stitcher_v1.types import stitch_details
-from google.cloud.video.stitcher_v1.types import video_stitcher_service
 from google.protobuf import empty_pb2  # type: ignore
+import pkg_resources
+
+from google.cloud.video.stitcher_v1.types import (
+    ad_tag_details,
+    cdn_keys,
+    sessions,
+    slates,
+    stitch_details,
+    video_stitcher_service,
+)
 
 try:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
@@ -86,6 +88,7 @@ class VideoStitcherServiceTransport(abc.ABC):
             always_use_jwt_access (Optional[bool]): Whether self signed JWT should
                 be used for service account credentials.
         """
+
         # Save the hostname. Default to port 443 (HTTPS) if none is specified.
         if ":" not in host:
             host += ":443"
@@ -434,6 +437,10 @@ class VideoStitcherServiceTransport(abc.ABC):
         [video_stitcher_service.GetLiveSessionRequest],
         Union[sessions.LiveSession, Awaitable[sessions.LiveSession]],
     ]:
+        raise NotImplementedError()
+
+    @property
+    def kind(self) -> str:
         raise NotImplementedError()
 
 

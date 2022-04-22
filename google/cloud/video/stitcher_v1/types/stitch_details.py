@@ -13,11 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import proto  # type: ignore
-
 from google.protobuf import duration_pb2  # type: ignore
 from google.protobuf import struct_pb2  # type: ignore
-
+import proto  # type: ignore
 
 __protobuf__ = proto.module(
     package="google.cloud.video.stitcher.v1",
@@ -68,7 +66,7 @@ class AdStitchDetail(proto.Message):
         skip_reason (str):
             Optional. Indicates the reason why the ad has
             been skipped.
-        media (Sequence[google.cloud.video.stitcher_v1.types.AdStitchDetail.MediaEntry]):
+        media (Mapping[str, google.protobuf.struct_pb2.Value]):
             Optional. The metadata of the chosen media
             file for the ad.
     """
