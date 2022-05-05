@@ -38,7 +38,7 @@ live_stream_uri = (
 ad_tag_uri = "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_ad_samples&sz=640x480&cust_params=sample_ct%3Dlinear&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator="
 slate_id = f"my-python-test-slate-{uuid.uuid4()}"
 slate_video_file_name = "ForBiggerJoyrides.mp4"
-slate_uri = f"gs://{input_bucket_name}{slate_video_file_name}"
+slate_uri = f"https://storage.googleapis.com/{input_bucket_name}{slate_video_file_name}"
 
 
 def test_live_session_operations(capsys):

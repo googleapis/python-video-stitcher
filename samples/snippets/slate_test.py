@@ -32,8 +32,10 @@ input_bucket_name = "cloud-samples-data/media/"
 slate_video_file_name = " ForBiggerEscapes.mp4"
 updated_slate_video_file_name = "ForBiggerJoyrides.mp4"
 
-slate_uri = f"gs://{input_bucket_name}{slate_video_file_name}"
-updated_slate_uri = f"gs://{input_bucket_name}{updated_slate_video_file_name}"
+slate_uri = f"https://storage.googleapis.com/{input_bucket_name}{slate_video_file_name}"
+updated_slate_uri = (
+    f"https://storage.googleapis.com/{input_bucket_name}{updated_slate_video_file_name}"
+)
 
 
 def test_slate_operations(capsys):
