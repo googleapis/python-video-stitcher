@@ -17,9 +17,12 @@ import uuid
 
 from google.api_core.exceptions import NotFound
 
+import requests
+
 import create_live_session
 import create_slate
 import delete_slate
+import get_live_ad_tag_detail
 import get_live_session
 import list_live_ad_tag_details
 
@@ -27,7 +30,7 @@ import list_live_ad_tag_details
 project_number = os.environ["GOOGLE_CLOUD_PROJECT_NUMBER"]
 location = "us-central1"
 input_bucket_name = "cloud-samples-data/media/"
-input_video_file_name = "hls-vod/manifest.m3u8"
+input_video_file_name = "hls-live/manifest.m3u8"
 live_stream_uri = (
     f"https://storage.googleapis.com/{input_bucket_name}{input_video_file_name}"
 )
@@ -56,7 +59,7 @@ def test_live_session_operations(capsys):
 
     # Tests
 
-    create_live_session.create_live_session(
+    create_live_session_response = create_live_session.create_live_session(
         project_number, location, live_stream_uri, ad_tag_uri, slate_id
     )
     out, _ = capsys.readouterr()
@@ -86,20 +89,43 @@ def test_live_session_operations(capsys):
 
     # Ad tag details
 
-    list_live_ad_tag_details.list_live_ad_tag_details(
-        project_number, location, session_id
+    # To get ad tag details, you need to curl the main manifest and
+    # a rendition first. This supplies player information to the API.
+    #
+    # Curl the play_uri first. The last line of the response will contain a
+    # renditions location. Curl the live session name with the rendition
+    # location.
+
+    r = requests.get(create_live_session_response.play_uri)
+    arr = r.text.splitlines()
+    renditions = arr[-1]
+    assert "renditions/" in renditions
+
+    # The create live session response will be in the following format:
+    # /projects/{project}/locations/{location}/liveSessions/{session-id}/manifest.m3u8?signature=...
+    # Replace manifest.m3u8?signature=... with the renditions location.
+    arr = create_live_session_response.play_uri.split("/")
+    arr.pop()
+    tmp = "/".join(arr)
+    renditions_uri = f"{tmp}/{renditions}"
+    r = requests.get(renditions_uri)
+
+    list_live_ad_tag_details_response = (
+        list_live_ad_tag_details.list_live_ad_tag_details(
+            project_number, location, session_id
+        )
     )
     out, _ = capsys.readouterr()
-    # Until we have a test livestream to use, nothing is returned (this is {} for the associated REST call).
-    # Can't test get_live_ad_tag_details until something is returned.
-    # ad_tag_details_name_prefix = f"projects/{project_number}/locations/{location}/liveSessions/{session_id}/liveAdTagDetails/"
-    assert "" in out
+    ad_tag_details_name_prefix = f"projects/{project_number}/locations/{location}/liveSessions/{session_id}/liveAdTagDetails/"
+    assert ad_tag_details_name_prefix in out
 
-    # str_slice = response.name.split("/")
-    # ad_tag_details_id = str_slice[len(str_slice) - 1].rstrip("\n")
-    # ad_tag_details_name = f"projects/{project_number}/locations/{location}/liveSessions/{session_id}/liveAdTagDetails/{ad_tag_details_id}"
-    # assert ad_tag_details_name in out
+    str_slice = list_live_ad_tag_details_response.live_ad_tag_details[0].name.split("/")
+    ad_tag_details_id = str_slice[len(str_slice) - 1].rstrip("\n")
+    ad_tag_details_name = f"projects/{project_number}/locations/{location}/liveSessions/{session_id}/liveAdTagDetails/{ad_tag_details_id}"
+    assert ad_tag_details_name in out
 
-    # get_live_ad_tag_detail.get_live_ad_tag_detail(project_number, location, session_id, ad_tag_details_id)
-    # out, _ = capsys.readouterr()
-    # assert ad_tag_details_name in out
+    get_live_ad_tag_detail.get_live_ad_tag_detail(
+        project_number, location, session_id, ad_tag_details_id
+    )
+    out, _ = capsys.readouterr()
+    assert ad_tag_details_name in out
