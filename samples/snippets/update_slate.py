@@ -16,7 +16,8 @@
 
 """Google Cloud Video Stitcher sample for updating a slate.
 Example usage:
-    python update_slate.py --project_number <project-number> --location <location> --slate_id <slate-id> --slate_uri <uri>
+    python update_slate.py --project_id <project-id> --location <location> \
+        --slate_id <slate-id> --slate_uri <uri>
 """
 
 # [START video_stitcher_update_slate]
@@ -30,17 +31,17 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 from google.protobuf import field_mask_pb2 as field_mask
 
 
-def update_slate(project_number, location, slate_id, slate_uri):
+def update_slate(project_id, location, slate_id, slate_uri):
     """Updates a slate.
     Args:
-        project_number: The GCP project number.
+        project_id: The GCP project ID.
         location: The location of the slate.
         slate_id: The existing slate's ID.
         slate_uri: Updated uri of the video slate; must be an MP4 video with at least one audio track."""
 
     client = VideoStitcherServiceClient()
 
-    name = f"projects/{project_number}/locations/{location}/slates/{slate_id}"
+    name = f"projects/{project_id}/locations/{location}/slates/{slate_id}"
     slate = stitcher_v1.types.Slate(
         name=name,
         uri=slate_uri,
@@ -56,9 +57,7 @@ def update_slate(project_number, location, slate_id, slate_uri):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--project_number", help="Your Cloud project number.", required=True
-    )
+    parser.add_argument("--project_id", help="Your Cloud project ID.", required=True)
     parser.add_argument(
         "--location",
         help="The location of the slate.",
@@ -76,7 +75,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     update_slate(
-        args.project_number,
+        args.project_id,
         args.location,
         args.slate_id,
         args.slate_uri,

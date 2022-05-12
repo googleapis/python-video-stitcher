@@ -23,13 +23,14 @@ import get_slate
 import list_slates
 import update_slate
 
+
 location = "us-central1"
 project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
 project_number = os.environ["GOOGLE_CLOUD_PROJECT_NUMBER"]
 slate_id = f"my-python-test-slate-{uuid.uuid4()}"
 
 input_bucket_name = "cloud-samples-data/media/"
-slate_video_file_name = " ForBiggerEscapes.mp4"
+slate_video_file_name = "ForBiggerEscapes.mp4"
 updated_slate_video_file_name = "ForBiggerJoyrides.mp4"
 
 slate_uri = f"https://storage.googleapis.com/{input_bucket_name}{slate_video_file_name}"
@@ -40,36 +41,38 @@ updated_slate_uri = (
 
 def test_slate_operations(capsys):
 
-    slate_name = f"projects/{project_number}/locations/{location}/slates/{slate_id}"
+    slate_name_project_number = (
+        f"projects/{project_number}/locations/{location}/slates/{slate_id}"
+    )
     slate_name_project_id = (
         f"projects/{project_id}/locations/{location}/slates/{slate_id}"
     )
 
     try:
-        delete_slate.delete_slate(project_number, location, slate_id)
+        delete_slate.delete_slate(project_id, location, slate_id)
     except NotFound as e:
         print(f"Ignoring NotFound, details: {e}")
     out, _ = capsys.readouterr()
 
-    create_slate.create_slate(project_number, location, slate_id, slate_uri)
+    create_slate.create_slate(project_id, location, slate_id, slate_uri)
     out, _ = capsys.readouterr()
-    assert slate_name in out
+    assert slate_name_project_number in out
 
-    list_slates.list_slates(project_number, location)
+    list_slates.list_slates(project_id, location)
     out, _ = capsys.readouterr()
-    assert slate_name in out
+    assert slate_name_project_id in out
 
     response = update_slate.update_slate(
-        project_number, location, slate_id, updated_slate_uri
+        project_id, location, slate_id, updated_slate_uri
     )
     out, _ = capsys.readouterr()
     assert slate_name_project_id in out
     assert updated_slate_uri in response.uri
 
-    get_slate.get_slate(project_number, location, slate_id)
+    get_slate.get_slate(project_id, location, slate_id)
     out, _ = capsys.readouterr()
-    assert slate_name in out
+    assert slate_name_project_id in out
 
-    delete_slate.delete_slate(project_number, location, slate_id)
+    delete_slate.delete_slate(project_id, location, slate_id)
     out, _ = capsys.readouterr()
     assert "Deleted slate" in out

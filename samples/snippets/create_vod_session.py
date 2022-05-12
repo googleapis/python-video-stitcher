@@ -14,9 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Google Cloud Video Stitcher sample for creating a video on demand (VOD) session in which to insert ads.
+"""Google Cloud Video Stitcher sample for creating a video on demand (VOD)
+session in which to insert ads.
 Example usage:
-    python create_vod_session.py --project_number <project-number> --location <location> --source_uri <uri> --ad_tag_uri <uri>
+    python create_vod_session.py --project_id <project-id> \
+        --location <location> --source_uri <uri> --ad_tag_uri <uri>
 """
 
 # [START video_stitcher_create_vod_session]
@@ -29,10 +31,11 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 
 
-def create_vod_session(project_number, location, source_uri, ad_tag_uri):
-    """Creates a VOD session. VOD sessions are ephemeral resources that expire after a few hours.
+def create_vod_session(project_id, location, source_uri, ad_tag_uri):
+    """Creates a VOD session. VOD sessions are ephemeral resources that expire
+    after a few hours.
     Args:
-        project_number: The GCP project number.
+        project_id: The GCP project ID.
         location: The location in which to create the session.
         source_uri: Uri of the media to stitch; this URI must reference either an MPEG-DASH
                     manifest (.mpd) file or an M3U playlist manifest (.m3u8) file.
@@ -40,7 +43,7 @@ def create_vod_session(project_number, location, source_uri, ad_tag_uri):
 
     client = VideoStitcherServiceClient()
 
-    parent = f"projects/{project_number}/locations/{location}"
+    parent = f"projects/{project_id}/locations/{location}"
 
     vod_session = stitcher_v1.types.VodSession(
         source_uri=source_uri, ad_tag_uri=ad_tag_uri
@@ -55,9 +58,7 @@ def create_vod_session(project_number, location, source_uri, ad_tag_uri):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--project_number", help="Your Cloud project number.", required=True
-    )
+    parser.add_argument("--project_id", help="Your Cloud project ID.", required=True)
     parser.add_argument(
         "--location",
         help="The location in which to create the VOD session.",
@@ -75,7 +76,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     create_vod_session(
-        args.project_number,
+        args.project_id,
         args.location,
         args.source_uri,
         args.ad_tag_uri,

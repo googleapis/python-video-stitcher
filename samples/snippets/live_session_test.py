@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import os
+import re
 import uuid
 
 from google.api_core.exceptions import NotFound
@@ -26,7 +27,7 @@ import get_live_ad_tag_detail
 import get_live_session
 import list_live_ad_tag_details
 
-
+project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
 project_number = os.environ["GOOGLE_CLOUD_PROJECT_NUMBER"]
 location = "us-central1"
 input_bucket_name = "cloud-samples-data/media/"
@@ -48,19 +49,19 @@ def test_live_session_operations(capsys):
     slate_name = f"projects/{project_number}/locations/{location}/slates/{slate_id}"
 
     try:
-        delete_slate.delete_slate(project_number, location, slate_id)
+        delete_slate.delete_slate(project_id, location, slate_id)
     except NotFound as e:
         print(f"Ignoring NotFound, details: {e}")
     out, _ = capsys.readouterr()
 
-    create_slate.create_slate(project_number, location, slate_id, slate_uri)
+    create_slate.create_slate(project_id, location, slate_id, slate_uri)
     out, _ = capsys.readouterr()
     assert slate_name in out
 
     # Tests
 
     create_live_session_response = create_live_session.create_live_session(
-        project_number, location, live_stream_uri, ad_tag_uri, slate_id
+        project_id, location, live_stream_uri, ad_tag_uri, slate_id
     )
     out, _ = capsys.readouterr()
     session_name_prefix = (
@@ -75,13 +76,13 @@ def test_live_session_operations(capsys):
     )
     assert session_name in out
 
-    get_live_session.get_live_session(project_number, location, session_id)
+    get_live_session.get_live_session(project_id, location, session_id)
     out, _ = capsys.readouterr()
     assert session_name in out
 
     # Clean up slate as it is no longer needed
 
-    delete_slate.delete_slate(project_number, location, slate_id)
+    delete_slate.delete_slate(project_id, location, slate_id)
     out, _ = capsys.readouterr()
     assert "Deleted slate" in out
 
@@ -90,18 +91,19 @@ def test_live_session_operations(capsys):
     # Ad tag details
 
     # To get ad tag details, you need to curl the main manifest and
-    # a rendition first. This supplies player information to the API.
+    # a rendition first. This supplies media player information to the API.
     #
     # Curl the play_uri first. The last line of the response will contain a
     # renditions location. Curl the live session name with the rendition
-    # location.
+    # location appended.
 
     r = requests.get(create_live_session_response.play_uri)
-    arr = r.text.splitlines()
-    renditions = arr[-1]
+    match = re.search("renditions/.*", r.text)
+    assert match
+    renditions = match.group()
     assert "renditions/" in renditions
 
-    # The create live session response will be in the following format:
+    # create_live_session_response.play_uri will be in the following format:
     # /projects/{project}/locations/{location}/liveSessions/{session-id}/manifest.m3u8?signature=...
     # Replace manifest.m3u8?signature=... with the renditions location.
     arr = create_live_session_response.play_uri.split("/")
@@ -112,7 +114,7 @@ def test_live_session_operations(capsys):
 
     list_live_ad_tag_details_response = (
         list_live_ad_tag_details.list_live_ad_tag_details(
-            project_number, location, session_id
+            project_id, location, session_id
         )
     )
     out, _ = capsys.readouterr()
@@ -124,6 +126,7 @@ def test_live_session_operations(capsys):
     ad_tag_details_name = f"projects/{project_number}/locations/{location}/liveSessions/{session_id}/liveAdTagDetails/{ad_tag_details_id}"
     assert ad_tag_details_name in out
 
+    # b/231626944 for projectNumber below
     get_live_ad_tag_detail.get_live_ad_tag_detail(
         project_number, location, session_id, ad_tag_details_id
     )

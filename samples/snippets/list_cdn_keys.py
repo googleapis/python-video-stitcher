@@ -16,7 +16,7 @@
 
 """Google Cloud Video Stitcher sample for listing all CDN keys in a location.
 Example usage:
-    python list_cdn_keys.py --project_number <project-number> --location <location>
+    python list_cdn_keys.py --project_id <project-id> --location <location>
 """
 
 # [START video_stitcher_list_cdn_keys]
@@ -28,15 +28,15 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 
 
-def list_cdn_keys(project_number, location):
+def list_cdn_keys(project_id, location):
     """Lists all CDN keys in a location.
     Args:
-        project_number: The GCP project number.
+        project_id: The GCP project ID.
         location: The location of the CDN keys."""
 
     client = VideoStitcherServiceClient()
 
-    parent = f"projects/{project_number}/locations/{location}"
+    parent = f"projects/{project_id}/locations/{location}"
     response = client.list_cdn_keys(parent=parent)
     print("CDN keys:")
     for cdn_key in response.cdn_keys:
@@ -49,9 +49,7 @@ def list_cdn_keys(project_number, location):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--project_number", help="Your Cloud project number.", required=True
-    )
+    parser.add_argument("--project_id", help="Your Cloud project ID.", required=True)
     parser.add_argument(
         "--location",
         help="The location of the CDN keys.",
@@ -59,6 +57,6 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     list_cdn_keys(
-        args.project_number,
+        args.project_id,
         args.location,
     )

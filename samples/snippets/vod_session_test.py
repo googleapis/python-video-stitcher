@@ -21,6 +21,7 @@ import get_vod_stitch_detail
 import list_vod_ad_tag_details
 import list_vod_stitch_details
 
+project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
 project_number = os.environ["GOOGLE_CLOUD_PROJECT_NUMBER"]
 location = "us-central1"
 input_bucket_name = "cloud-samples-data/media/"
@@ -32,7 +33,7 @@ ad_tag_uri = "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/extern
 
 def test_vod_session_operations(capsys):
 
-    create_vod_session.create_vod_session(project_number, location, vod_uri, ad_tag_uri)
+    create_vod_session.create_vod_session(project_id, location, vod_uri, ad_tag_uri)
     out, _ = capsys.readouterr()
     session_name_prefix = f"projects/{project_number}/locations/{location}/vodSessions/"
     assert session_name_prefix in out
@@ -44,7 +45,7 @@ def test_vod_session_operations(capsys):
     )
     assert session_name in out
 
-    get_vod_session.get_vod_session(project_number, location, session_id)
+    get_vod_session.get_vod_session(project_id, location, session_id)
     out, _ = capsys.readouterr()
     assert session_name in out
 
@@ -53,7 +54,7 @@ def test_vod_session_operations(capsys):
     # Ad tag details
 
     response = list_vod_ad_tag_details.list_vod_ad_tag_details(
-        project_number, location, session_id
+        project_id, location, session_id
     )
     out, _ = capsys.readouterr()
     ad_tag_details_name_prefix = f"projects/{project_number}/locations/{location}/vodSessions/{session_id}/vodAdTagDetails/"
@@ -65,7 +66,7 @@ def test_vod_session_operations(capsys):
     assert ad_tag_details_name in out
 
     get_vod_ad_tag_detail.get_vod_ad_tag_detail(
-        project_number, location, session_id, ad_tag_details_id
+        project_id, location, session_id, ad_tag_details_id
     )
     out, _ = capsys.readouterr()
     assert ad_tag_details_name in out
@@ -73,7 +74,7 @@ def test_vod_session_operations(capsys):
     # Stitch details
 
     response = list_vod_stitch_details.list_vod_stitch_details(
-        project_number, location, session_id
+        project_id, location, session_id
     )
     out, _ = capsys.readouterr()
     stitch_details_name_prefix = f"projects/{project_number}/locations/{location}/vodSessions/{session_id}/vodStitchDetails/"
@@ -85,7 +86,7 @@ def test_vod_session_operations(capsys):
     assert stitch_details_name in out
 
     get_vod_stitch_detail.get_vod_stitch_detail(
-        project_number, location, session_id, stitch_details_id
+        project_id, location, session_id, stitch_details_id
     )
     out, _ = capsys.readouterr()
     assert stitch_details_name in out

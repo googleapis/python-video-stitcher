@@ -14,9 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Google Cloud Video Stitcher sample for creating a slate. A slate is displayed when ads are not available.
+"""Google Cloud Video Stitcher sample for creating a slate. A slate is displayed
+when ads are not available.
 Example usage:
-    python create_slate.py --project_number <project-number> --location <location> --slate_id <slate-id> --slate_uri <uri>
+    python create_slate.py --project_id <project-id> --location <location> \
+        --slate_id <slate-id> --slate_uri <uri>
 """
 
 # [START video_stitcher_create_slate]
@@ -29,17 +31,17 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 
 
-def create_slate(project_number, location, slate_id, slate_uri):
+def create_slate(project_id, location, slate_id, slate_uri):
     """Creates a slate.
     Args:
-        project_number: The GCP project number.
+        project_id: The GCP project ID.
         location: The location in which to create the slate.
         slate_id: The user-defined slate ID.
         slate_uri: Uri of the video slate; must be an MP4 video with at least one audio track."""
 
     client = VideoStitcherServiceClient()
 
-    parent = f"projects/{project_number}/locations/{location}"
+    parent = f"projects/{project_id}/locations/{location}"
 
     slate = stitcher_v1.types.Slate(
         uri=slate_uri,
@@ -54,9 +56,7 @@ def create_slate(project_number, location, slate_id, slate_uri):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--project_number", help="Your Cloud project number.", required=True
-    )
+    parser.add_argument("--project_id", help="Your Cloud project ID.", required=True)
     parser.add_argument(
         "--location",
         help="The location in which to create the slate.",
@@ -74,7 +74,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     create_slate(
-        args.project_number,
+        args.project_id,
         args.location,
         args.slate_id,
         args.slate_uri,

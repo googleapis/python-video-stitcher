@@ -14,9 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Google Cloud Video Stitcher sample for creating a CDN key. A CDN key is used to retrieve protected media.
+"""Google Cloud Video Stitcher sample for creating a CDN key. A CDN key is used
+to retrieve protected media.
 Example usage:
-    python create_cdn_key.py --project_number <project-number> --location <location> --cdn_key_id <cdn_key_id> \
+    python create_cdn_key.py --project_id <project-id> --location <location> --cdn_key_id <cdn_key_id> \
         --hostname <hostname> [--gcdn_keyname <name> --gcdn_private_key <secret> | --akamai_token_key <token-key>]
 """
 
@@ -31,7 +32,7 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 
 
 def create_cdn_key(
-    project_number,
+    project_id,
     location,
     cdn_key_id,
     hostname,
@@ -41,7 +42,7 @@ def create_cdn_key(
 ):
     """Creates a Google Cloud or Akamai CDN key.
     Args:
-        project_number: The GCP project number.
+        project_id: The GCP project ID.
         location: The location in which to create the CDN key.
         cdn_key_id: The user-defined CDN key ID.
         hostname: The hostname to which this CDN key applies.
@@ -51,7 +52,7 @@ def create_cdn_key(
 
     client = VideoStitcherServiceClient()
 
-    parent = f"projects/{project_number}/locations/{location}"
+    parent = f"projects/{project_id}/locations/{location}"
 
     cdn_key = stitcher_v1.types.CdnKey(
         name=cdn_key_id,
@@ -79,9 +80,7 @@ def create_cdn_key(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--project_number", help="Your Cloud project number.", required=True
-    )
+    parser.add_argument("--project_id", help="Your Cloud project ID.", required=True)
     parser.add_argument(
         "--location",
         help="The location in which to create the CDN key.",
@@ -111,7 +110,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     create_cdn_key(
-        args.project_number,
+        args.project_id,
         args.location,
         args.cdn_key_id,
         args.hostname,

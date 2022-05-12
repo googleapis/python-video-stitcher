@@ -25,12 +25,11 @@ import update_cdn_key
 
 location = "us-central1"
 project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
-project_number = os.environ["GOOGLE_CLOUD_PROJECT_NUMBER"]
 gcdn_cdn_key_id = f"my-python-test-cdn-key-{uuid.uuid4()}"
 akamai_cdn_key_id = f"my-python-test-cdn-key-{uuid.uuid4()}"
 
 hostname = "cdn.example.com"
-updated_hostname = "example.com"
+updated_hostname = "updated.example.com"
 
 gcdn_key_name = "gcdn-key"
 gcdn_private_key = "VGhpcyBpcyBhIHRlc3Qgc3RyaW5nLg=="
@@ -42,13 +41,13 @@ updated_akamai_key = updated_gcdn_private_key
 def test_cdn_key_operations(capsys):
 
     try:
-        delete_cdn_key.delete_cdn_key(project_number, location, gcdn_cdn_key_id)
+        delete_cdn_key.delete_cdn_key(project_id, location, gcdn_cdn_key_id)
     except NotFound as e:
         print(f"Ignoring NotFound, details: {e}")
     out, _ = capsys.readouterr()
 
     try:
-        delete_cdn_key.delete_cdn_key(project_number, location, akamai_cdn_key_id)
+        delete_cdn_key.delete_cdn_key(project_id, location, akamai_cdn_key_id)
     except NotFound as e:
         print(f"Ignoring NotFound, details: {e}")
     out, _ = capsys.readouterr()
@@ -56,7 +55,7 @@ def test_cdn_key_operations(capsys):
     # GCDN CDN key tests
 
     create_cdn_key.create_cdn_key(
-        project_number,
+        project_id,
         location,
         gcdn_cdn_key_id,
         hostname,
@@ -66,13 +65,13 @@ def test_cdn_key_operations(capsys):
     out, _ = capsys.readouterr()
     assert gcdn_cdn_key_id in out
 
-    list_cdn_keys.list_cdn_keys(project_number, location)
+    list_cdn_keys.list_cdn_keys(project_id, location)
     out, _ = capsys.readouterr()
     assert gcdn_cdn_key_id in out
 
     # Update the hostname only
     response = update_cdn_key.update_cdn_key(
-        project_number, location, gcdn_cdn_key_id, updated_hostname
+        project_id, location, gcdn_cdn_key_id, updated_hostname
     )
     out, _ = capsys.readouterr()
     assert gcdn_cdn_key_id in out
@@ -80,7 +79,7 @@ def test_cdn_key_operations(capsys):
 
     # Update the private key; the private key value is not returned by the client
     response = update_cdn_key.update_cdn_key(
-        project_number,
+        project_id,
         location,
         gcdn_cdn_key_id,
         hostname,
@@ -90,18 +89,18 @@ def test_cdn_key_operations(capsys):
     out, _ = capsys.readouterr()
     assert gcdn_cdn_key_id in out
 
-    get_cdn_key.get_cdn_key(project_number, location, gcdn_cdn_key_id)
+    get_cdn_key.get_cdn_key(project_id, location, gcdn_cdn_key_id)
     out, _ = capsys.readouterr()
     assert gcdn_cdn_key_id in out
 
-    delete_cdn_key.delete_cdn_key(project_number, location, gcdn_cdn_key_id)
+    delete_cdn_key.delete_cdn_key(project_id, location, gcdn_cdn_key_id)
     out, _ = capsys.readouterr()
     assert "Deleted CDN key" in out
 
     # Akamai CDN key tests
 
     create_cdn_key.create_cdn_key(
-        project_number,
+        project_id,
         location,
         akamai_cdn_key_id,
         hostname,
@@ -110,13 +109,13 @@ def test_cdn_key_operations(capsys):
     out, _ = capsys.readouterr()
     assert akamai_cdn_key_id in out
 
-    list_cdn_keys.list_cdn_keys(project_number, location)
+    list_cdn_keys.list_cdn_keys(project_id, location)
     out, _ = capsys.readouterr()
     assert akamai_cdn_key_id in out
 
     # Update the hostname only
     response = update_cdn_key.update_cdn_key(
-        project_number, location, akamai_cdn_key_id, updated_hostname
+        project_id, location, akamai_cdn_key_id, updated_hostname
     )
     out, _ = capsys.readouterr()
     assert akamai_cdn_key_id in out
@@ -124,7 +123,7 @@ def test_cdn_key_operations(capsys):
 
     # Update the private key; the private key value is not returned by the client
     response = update_cdn_key.update_cdn_key(
-        project_number,
+        project_id,
         location,
         akamai_cdn_key_id,
         hostname,
@@ -133,10 +132,10 @@ def test_cdn_key_operations(capsys):
     out, _ = capsys.readouterr()
     assert akamai_cdn_key_id in out
 
-    get_cdn_key.get_cdn_key(project_number, location, akamai_cdn_key_id)
+    get_cdn_key.get_cdn_key(project_id, location, akamai_cdn_key_id)
     out, _ = capsys.readouterr()
     assert akamai_cdn_key_id in out
 
-    delete_cdn_key.delete_cdn_key(project_number, location, akamai_cdn_key_id)
+    delete_cdn_key.delete_cdn_key(project_id, location, akamai_cdn_key_id)
     out, _ = capsys.readouterr()
     assert "Deleted CDN key" in out

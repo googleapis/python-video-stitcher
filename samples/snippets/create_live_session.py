@@ -14,9 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Google Cloud Video Stitcher sample for creating a livestream session in which to insert ads.
+"""Google Cloud Video Stitcher sample for creating a live stream session in
+which to insert ads.
 Example usage:
-    python create_live_session.py --project_number <project-number> --location <location> --live_stream_uri <uri> --ad_tag_uri <uri> --slate_id <slate-id>
+    python create_live_session.py --project_id <project-id> \
+        --location <location> --live_stream_uri <uri> --ad_tag_uri <uri> \
+        --slate_id <slate-id>
 """
 
 # [START video_stitcher_create_live_session]
@@ -29,12 +32,11 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 
 
-def create_live_session(
-    project_number, location, live_stream_uri, ad_tag_uri, slate_id
-):
-    """Creates a live session. Live sessions are ephemeral resources that expire after a few minutes.
+def create_live_session(project_id, location, live_stream_uri, ad_tag_uri, slate_id):
+    """Creates a live session. Live sessions are ephemeral resources that expire
+    after a few minutes.
     Args:
-        project_number: The GCP project number.
+        project_id: The GCP project ID.
         location: The location in which to create the session.
         live_stream_uri: Uri of the livestream to stitch; this URI must reference either an MPEG-DASH
                     manifest (.mpd) file or an M3U playlist manifest (.m3u8) file.
@@ -43,7 +45,7 @@ def create_live_session(
 
     client = VideoStitcherServiceClient()
 
-    parent = f"projects/{project_number}/locations/{location}"
+    parent = f"projects/{project_id}/locations/{location}"
 
     # Create dictionaries and pass them to the LiveSession constructor
     ad_tag_map = {"default": stitcher_v1.AdTag(uri=ad_tag_uri)}
@@ -61,9 +63,7 @@ def create_live_session(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--project_number", help="Your Cloud project number.", required=True
-    )
+    parser.add_argument("--project_id", help="Your Cloud project ID.", required=True)
     parser.add_argument(
         "--location",
         help="The location in which to create the live session.",
@@ -86,7 +86,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     create_live_session(
-        args.project_number,
+        args.project_id,
         args.location,
         args.live_stream_uri,
         args.ad_tag_uri,

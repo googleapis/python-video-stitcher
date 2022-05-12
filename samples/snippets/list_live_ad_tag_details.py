@@ -14,9 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Google Cloud Video Stitcher sample for listing the ad tag details for a live session.
+"""Google Cloud Video Stitcher sample for listing the ad tag details for a
+live session.
 Example usage:
-    python list_live_ad_tag_details.py --project_number <project-number> --location <location> --session_id <session-id>
+    python list_live_ad_tag_details.py --project_id <project-id> \
+        --location <location> --session_id <session-id>
 """
 
 # [START video_stitcher_list_live_ad_tag_details]
@@ -28,17 +30,18 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 
 
-def list_live_ad_tag_details(project_number, location, session_id):
+def list_live_ad_tag_details(project_id, location, session_id):
     """Lists the ad tag details for the specified live session.
     Args:
-        project_number: The GCP project number.
+        project_id: The GCP project ID.
         location: The location of the session.
         session_id: The ID of the live session."""
 
     client = VideoStitcherServiceClient()
 
-    parent = client.live_session_path(project_number, location, session_id)
+    parent = client.live_session_path(project_id, location, session_id)
     page_result = client.list_live_ad_tag_details(parent=parent)
+    print("Live ad tag details:")
     for response in page_result:
         print(response)
 
@@ -49,9 +52,7 @@ def list_live_ad_tag_details(project_number, location, session_id):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--project_number", help="Your Cloud project number.", required=True
-    )
+    parser.add_argument("--project_id", help="Your Cloud project ID.", required=True)
     parser.add_argument(
         "--location", help="The location of the live session.", required=True
     )
@@ -59,4 +60,4 @@ if __name__ == "__main__":
         "--session_id", help="The ID of the live session.", required=True
     )
     args = parser.parse_args()
-    list_live_ad_tag_details(args.project_number, args.location, args.session_id)
+    list_live_ad_tag_details(args.project_id, args.location, args.session_id)

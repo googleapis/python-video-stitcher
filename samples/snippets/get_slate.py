@@ -16,7 +16,8 @@
 
 """Google Cloud Video Stitcher sample for getting a slate.
 Example usage:
-    python get_slate.py --project_number <project-number> --location <location> --slate_id <slate-id>
+    python get_slate.py --project_id <project-id> --location <location> \
+        --slate_id <slate-id>
 """
 
 # [START video_stitcher_get_slate]
@@ -28,16 +29,16 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 
 
-def get_slate(project_number, location, slate_id):
+def get_slate(project_id, location, slate_id):
     """Gets a slate.
     Args:
-        project_number: The GCP project number.
+        project_id: The GCP project ID.
         location: The location of the slate.
         slate_id: The user-defined slate ID."""
 
     client = VideoStitcherServiceClient()
 
-    name = f"projects/{project_number}/locations/{location}/slates/{slate_id}"
+    name = f"projects/{project_id}/locations/{location}/slates/{slate_id}"
     response = client.get_slate(name=name)
     print(f"Slate: {response.name}")
     return response
@@ -47,9 +48,7 @@ def get_slate(project_number, location, slate_id):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--project_number", help="Your Cloud project number.", required=True
-    )
+    parser.add_argument("--project_id", help="Your Cloud project ID.", required=True)
     parser.add_argument(
         "--location",
         help="The location of the slate.",
@@ -62,7 +61,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     get_slate(
-        args.project_number,
+        args.project_id,
         args.location,
         args.slate_id,
     )

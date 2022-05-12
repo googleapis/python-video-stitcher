@@ -14,9 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Google Cloud Video Stitcher sample for getting the specified stitch detail for a video on demand (VOD) session.
+"""Google Cloud Video Stitcher sample for getting the specified stitch detail
+for a video on demand (VOD) session.
 Example usage:
-    python get_vod_stitch_detail.py --project_number <project-number> --location <location> --session_id <session-id> --stitch_details_id <stitch-details-id>
+    python get_vod_stitch_detail.py --project_id <project-id> \
+        --location <location> --session_id <session-id> \
+        --stitch_details_id <stitch-details-id>
 """
 
 # [START video_stitcher_get_vod_stitch_detail]
@@ -28,21 +31,21 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 
 
-def get_vod_stitch_detail(project_number, location, session_id, stitch_details_id):
+def get_vod_stitch_detail(project_id, location, session_id, stitch_detail_id):
     """Gets the specified stitch detail for a VOD session.
     Args:
-        project_number: The GCP project number.
+        project_id: The GCP project ID.
         location: The location of the session.
         session_id: The ID of the VOD session.
-        stitch_details_id: The id of the stitch details."""
+        stitch_detail_id: The ID of the stitch details."""
 
     client = VideoStitcherServiceClient()
 
     name = client.vod_stitch_detail_path(
-        project_number, location, session_id, stitch_details_id
+        project_id, location, session_id, stitch_detail_id
     )
     response = client.get_vod_stitch_detail(name=name)
-    print(f"VOD stitch details: {response.name}")
+    print(f"VOD stitch detail: {response.name}")
     return response
 
 
@@ -50,9 +53,7 @@ def get_vod_stitch_detail(project_number, location, session_id, stitch_details_i
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--project_number", help="Your Cloud project number.", required=True
-    )
+    parser.add_argument("--project_id", help="Your Cloud project ID.", required=True)
     parser.add_argument(
         "--location", help="The location of the VOD session.", required=True
     )
@@ -60,9 +61,9 @@ if __name__ == "__main__":
         "--session_id", help="The ID of the VOD session.", required=True
     )
     parser.add_argument(
-        "--stitch_details_id", help="The ID of the stitch details.", required=True
+        "--stitch_detail_id", help="The ID of the stitch details.", required=True
     )
     args = parser.parse_args()
     get_vod_stitch_detail(
-        args.project_number, args.location, args.session_id, args.stitch_details_id
+        args.project_id, args.location, args.session_id, args.stitch_detail_id
     )

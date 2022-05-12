@@ -16,7 +16,8 @@
 
 """Google Cloud Video Stitcher sample for deleting a CDN key.
 Example usage:
-    python delete_cdn_key.py --project_number <project-number> --location <location> --cdn_key_id <cdn_key_id>
+    python delete_cdn_key.py --project_id <project-id> --location <location> \
+        --cdn_key_id <cdn_key_id>
 """
 
 # [START video_stitcher_delete_cdn_key]
@@ -28,16 +29,16 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 
 
-def delete_cdn_key(project_number, location, cdn_key_id):
+def delete_cdn_key(project_id, location, cdn_key_id):
     """Deletes a CDN key.
     Args:
-        project_number: The GCP project number.
+        project_id: The GCP project ID.
         location: The location of the CDN key.
         cdn_key_id: The user-defined CDN key ID."""
 
     client = VideoStitcherServiceClient()
 
-    name = f"projects/{project_number}/locations/{location}/cdnKeys/{cdn_key_id}"
+    name = f"projects/{project_id}/locations/{location}/cdnKeys/{cdn_key_id}"
     response = client.delete_cdn_key(name=name)
     print("Deleted CDN key")
     return response
@@ -47,9 +48,7 @@ def delete_cdn_key(project_number, location, cdn_key_id):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--project_number", help="Your Cloud project number.", required=True
-    )
+    parser.add_argument("--project_id", help="Your Cloud project ID.", required=True)
     parser.add_argument(
         "--location",
         help="The location of the CDN key.",
@@ -62,7 +61,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     delete_cdn_key(
-        args.project_number,
+        args.project_id,
         args.location,
         args.cdn_key_id,
     )
