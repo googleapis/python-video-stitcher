@@ -24,7 +24,7 @@ import list_slates
 import update_slate
 
 
-location = "us-central1"
+location = "us-west1"
 project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
 project_number = os.environ["GOOGLE_CLOUD_PROJECT_NUMBER"]
 slate_id = f"my-python-test-slate-{uuid.uuid4()}"
