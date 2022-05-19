@@ -28,7 +28,7 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 
 
-def list_cdn_keys(project_id, location):
+def list_cdn_keys(project_id: str, location: str) -> str:
     """Lists all CDN keys in a location.
     Args:
         project_id: The GCP project ID.

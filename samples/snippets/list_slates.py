@@ -28,7 +28,7 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 
 
-def list_slates(project_id, location):
+def list_slates(project_id: str, location: str) -> str:
     """Lists all slates in a location.
     Args:
         project_id: The GCP project ID.

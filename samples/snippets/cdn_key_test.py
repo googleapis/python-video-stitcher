@@ -16,6 +16,7 @@ import os
 import uuid
 
 from google.api_core.exceptions import NotFound
+import pytest
 
 import create_cdn_key
 import delete_cdn_key
@@ -38,7 +39,7 @@ akamai_key = gcdn_private_key
 updated_akamai_key = updated_gcdn_private_key
 
 
-def test_cdn_key_operations(capsys):
+def test_cdn_key_operations(capsys: pytest.fixture) -> None:
 
     try:
         delete_cdn_key.delete_cdn_key(project_id, location, gcdn_cdn_key_id)

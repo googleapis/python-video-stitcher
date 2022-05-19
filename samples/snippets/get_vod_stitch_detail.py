@@ -31,7 +31,9 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 
 
-def get_vod_stitch_detail(project_id, location, session_id, stitch_detail_id):
+def get_vod_stitch_detail(
+    project_id: str, location: str, session_id: str, stitch_detail_id: str
+) -> str:
     """Gets the specified stitch detail for a VOD session.
     Args:
         project_id: The GCP project ID.

@@ -31,7 +31,9 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 
 
-def get_live_ad_tag_detail(project_id, location, session_id, ad_tag_detail_id):
+def get_live_ad_tag_detail(
+    project_id: str, location: str, session_id: str, ad_tag_detail_id: str
+) -> str:
     """Gets the specified ad tag detail for a live session.
     Args:
         project_id: The GCP project ID.

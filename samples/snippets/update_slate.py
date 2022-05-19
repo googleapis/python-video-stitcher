@@ -31,7 +31,7 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 from google.protobuf import field_mask_pb2 as field_mask
 
 
-def update_slate(project_id, location, slate_id, slate_uri):
+def update_slate(project_id: str, location: str, slate_id: str, slate_uri: str) -> str:
     """Updates a slate.
     Args:
         project_id: The GCP project ID.

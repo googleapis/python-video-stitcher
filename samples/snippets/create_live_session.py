@@ -32,7 +32,9 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 
 
-def create_live_session(project_id, location, live_stream_uri, ad_tag_uri, slate_id):
+def create_live_session(
+    project_id: str, location: str, live_stream_uri: str, ad_tag_uri: str, slate_id: str
+) -> str:
     """Creates a live session. Live sessions are ephemeral resources that expire
     after a few minutes.
     Args:

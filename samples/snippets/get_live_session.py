@@ -29,7 +29,7 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 
 
-def get_live_session(project_id, location, session_id):
+def get_live_session(project_id: str, location: str, session_id: str) -> str:
     """Gets a live session. Live sessions are ephemeral resources that expire
     after a few minutes.
     Args:

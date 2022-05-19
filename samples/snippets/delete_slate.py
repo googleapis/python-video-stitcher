@@ -29,7 +29,7 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 
 
-def delete_slate(project_id, location, slate_id):
+def delete_slate(project_id: str, location: str, slate_id: str) -> str:
     """Deletes a slate.
     Args:
         project_id: The GCP project ID.

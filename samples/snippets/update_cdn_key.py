@@ -33,14 +33,14 @@ from google.protobuf import field_mask_pb2 as field_mask
 
 
 def update_cdn_key(
-    project_id,
-    location,
-    cdn_key_id,
-    hostname,
-    gcdn_keyname=None,
-    gcdn_private_key=None,
-    akamai_token_key=None,
-):
+    project_id: str,
+    location: str,
+    cdn_key_id: str,
+    hostname: str,
+    gcdn_keyname: str = None,
+    gcdn_private_key: str = None,
+    akamai_token_key: str = None,
+) -> str:
     """Updates a Google Cloud or Akamai CDN key.
     Args:
         project_id: The GCP project ID.

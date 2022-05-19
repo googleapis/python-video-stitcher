@@ -29,7 +29,7 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 
 
-def get_slate(project_id, location, slate_id):
+def get_slate(project_id: str, location: str, slate_id: str) -> str:
     """Gets a slate.
     Args:
         project_id: The GCP project ID.

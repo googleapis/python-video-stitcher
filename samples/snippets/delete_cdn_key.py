@@ -29,7 +29,7 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 
 
-def delete_cdn_key(project_id, location, cdn_key_id):
+def delete_cdn_key(project_id: str, location: str, cdn_key_id: str) -> str:
     """Deletes a CDN key.
     Args:
         project_id: The GCP project ID.

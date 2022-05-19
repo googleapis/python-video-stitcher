@@ -29,7 +29,7 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 
 
-def get_cdn_key(project_id, location, cdn_key_id):
+def get_cdn_key(project_id: str, location: str, cdn_key_id: str) -> str:
     """Gets a CDN key.
     Args:
         project_id: The GCP project ID.

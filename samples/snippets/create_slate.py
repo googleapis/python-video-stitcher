@@ -31,7 +31,7 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 
 
-def create_slate(project_id, location, slate_id, slate_uri):
+def create_slate(project_id: str, location: str, slate_id: str, slate_uri: str) -> str:
     """Creates a slate.
     Args:
         project_id: The GCP project ID.

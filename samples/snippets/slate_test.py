@@ -16,6 +16,7 @@ import os
 import uuid
 
 from google.api_core.exceptions import NotFound
+import pytest
 
 import create_slate
 import delete_slate
@@ -38,7 +39,7 @@ updated_slate_uri = (
 )
 
 
-def test_slate_operations(capsys):
+def test_slate_operations(capsys: pytest.fixture) -> None:
 
     slate_name_project_number = (
         f"projects/{project_number}/locations/{location}/slates/{slate_id}"

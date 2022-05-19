@@ -31,7 +31,9 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 
 
-def create_vod_session(project_id, location, source_uri, ad_tag_uri):
+def create_vod_session(
+    project_id: str, location: str, source_uri: str, ad_tag_uri: str
+) -> str:
     """Creates a VOD session. VOD sessions are ephemeral resources that expire
     after a few hours.
     Args:

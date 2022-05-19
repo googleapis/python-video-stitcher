@@ -17,6 +17,8 @@ import re
 import uuid
 
 from google.api_core.exceptions import NotFound
+import pytest
+
 import requests
 
 import create_live_session
@@ -41,7 +43,7 @@ slate_video_file_name = "ForBiggerJoyrides.mp4"
 slate_uri = f"https://storage.googleapis.com/{input_bucket_name}{slate_video_file_name}"
 
 
-def test_live_session_operations(capsys):
+def test_live_session_operations(capsys: pytest.fixture) -> None:
 
     # Test setup
 
