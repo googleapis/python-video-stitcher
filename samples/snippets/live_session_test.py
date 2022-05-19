@@ -17,7 +17,6 @@ import re
 import uuid
 
 from google.api_core.exceptions import NotFound
-
 import requests
 
 import create_live_session
