@@ -2114,6 +2114,7 @@ def test_create_vod_session(request_type, transport: str = "grpc"):
             source_uri="source_uri_value",
             ad_tag_uri="ad_tag_uri_value",
             client_ad_tracking=True,
+            asset_id="asset_id_value",
         )
         response = client.create_vod_session(request)
 
@@ -2129,6 +2130,7 @@ def test_create_vod_session(request_type, transport: str = "grpc"):
     assert response.source_uri == "source_uri_value"
     assert response.ad_tag_uri == "ad_tag_uri_value"
     assert response.client_ad_tracking is True
+    assert response.asset_id == "asset_id_value"
 
 
 def test_create_vod_session_empty_call():
@@ -2175,6 +2177,7 @@ async def test_create_vod_session_async(
                 source_uri="source_uri_value",
                 ad_tag_uri="ad_tag_uri_value",
                 client_ad_tracking=True,
+                asset_id="asset_id_value",
             )
         )
         response = await client.create_vod_session(request)
@@ -2191,6 +2194,7 @@ async def test_create_vod_session_async(
     assert response.source_uri == "source_uri_value"
     assert response.ad_tag_uri == "ad_tag_uri_value"
     assert response.client_ad_tracking is True
+    assert response.asset_id == "asset_id_value"
 
 
 @pytest.mark.asyncio
@@ -2381,6 +2385,7 @@ def test_get_vod_session(request_type, transport: str = "grpc"):
             source_uri="source_uri_value",
             ad_tag_uri="ad_tag_uri_value",
             client_ad_tracking=True,
+            asset_id="asset_id_value",
         )
         response = client.get_vod_session(request)
 
@@ -2396,6 +2401,7 @@ def test_get_vod_session(request_type, transport: str = "grpc"):
     assert response.source_uri == "source_uri_value"
     assert response.ad_tag_uri == "ad_tag_uri_value"
     assert response.client_ad_tracking is True
+    assert response.asset_id == "asset_id_value"
 
 
 def test_get_vod_session_empty_call():
@@ -2438,6 +2444,7 @@ async def test_get_vod_session_async(
                 source_uri="source_uri_value",
                 ad_tag_uri="ad_tag_uri_value",
                 client_ad_tracking=True,
+                asset_id="asset_id_value",
             )
         )
         response = await client.get_vod_session(request)
@@ -2454,6 +2461,7 @@ async def test_get_vod_session_async(
     assert response.source_uri == "source_uri_value"
     assert response.ad_tag_uri == "ad_tag_uri_value"
     assert response.client_ad_tracking is True
+    assert response.asset_id == "asset_id_value"
 
 
 @pytest.mark.asyncio
@@ -6074,6 +6082,7 @@ def test_create_live_session(request_type, transport: str = "grpc"):
             client_ad_tracking=True,
             default_slate_id="default_slate_id_value",
             stitching_policy=sessions.LiveSession.StitchingPolicy.COMPLETE_AD,
+            stream_id="stream_id_value",
         )
         response = client.create_live_session(request)
 
@@ -6091,6 +6100,7 @@ def test_create_live_session(request_type, transport: str = "grpc"):
     assert response.client_ad_tracking is True
     assert response.default_slate_id == "default_slate_id_value"
     assert response.stitching_policy == sessions.LiveSession.StitchingPolicy.COMPLETE_AD
+    assert response.stream_id == "stream_id_value"
 
 
 def test_create_live_session_empty_call():
@@ -6139,6 +6149,7 @@ async def test_create_live_session_async(
                 client_ad_tracking=True,
                 default_slate_id="default_slate_id_value",
                 stitching_policy=sessions.LiveSession.StitchingPolicy.COMPLETE_AD,
+                stream_id="stream_id_value",
             )
         )
         response = await client.create_live_session(request)
@@ -6157,6 +6168,7 @@ async def test_create_live_session_async(
     assert response.client_ad_tracking is True
     assert response.default_slate_id == "default_slate_id_value"
     assert response.stitching_policy == sessions.LiveSession.StitchingPolicy.COMPLETE_AD
+    assert response.stream_id == "stream_id_value"
 
 
 @pytest.mark.asyncio
@@ -6353,6 +6365,7 @@ def test_get_live_session(request_type, transport: str = "grpc"):
             client_ad_tracking=True,
             default_slate_id="default_slate_id_value",
             stitching_policy=sessions.LiveSession.StitchingPolicy.COMPLETE_AD,
+            stream_id="stream_id_value",
         )
         response = client.get_live_session(request)
 
@@ -6370,6 +6383,7 @@ def test_get_live_session(request_type, transport: str = "grpc"):
     assert response.client_ad_tracking is True
     assert response.default_slate_id == "default_slate_id_value"
     assert response.stitching_policy == sessions.LiveSession.StitchingPolicy.COMPLETE_AD
+    assert response.stream_id == "stream_id_value"
 
 
 def test_get_live_session_empty_call():
@@ -6414,6 +6428,7 @@ async def test_get_live_session_async(
                 client_ad_tracking=True,
                 default_slate_id="default_slate_id_value",
                 stitching_policy=sessions.LiveSession.StitchingPolicy.COMPLETE_AD,
+                stream_id="stream_id_value",
             )
         )
         response = await client.get_live_session(request)
@@ -6432,6 +6447,7 @@ async def test_get_live_session_async(
     assert response.client_ad_tracking is True
     assert response.default_slate_id == "default_slate_id_value"
     assert response.stitching_policy == sessions.LiveSession.StitchingPolicy.COMPLETE_AD
+    assert response.stream_id == "stream_id_value"
 
 
 @pytest.mark.asyncio
