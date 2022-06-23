@@ -579,6 +579,7 @@ class VideoStitcherServiceClient(metaclass=VideoStitcherServiceClientMeta):
                 quota_project_id=client_options.quota_project_id,
                 client_info=client_info,
                 always_use_jwt_access=True,
+                api_audience=client_options.api_audience,
             )
 
     def create_cdn_key(
