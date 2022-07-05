@@ -6870,7 +6870,6 @@ def test_video_stitcher_service_transport_auth_adc(transport_class):
     [
         transports.VideoStitcherServiceGrpcTransport,
         transports.VideoStitcherServiceGrpcAsyncIOTransport,
-        transports.VideoStitcherServiceRestTransport,
     ],
 )
 def test_video_stitcher_service_transport_auth_gdch_credentials(transport_class):
