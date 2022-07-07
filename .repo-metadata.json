@@ -12,5 +12,6 @@
     "api_id": "videostitcher.googleapis.com",
     "default_version": "v1",
     "codeowner_team": "",
-    "api_shortname": "videostitcher"
+    "api_shortname": "videostitcher",
+    "api_description": "allows you to manipulate video content to dynamically insert ads prior to delivery to client devices."
 }
