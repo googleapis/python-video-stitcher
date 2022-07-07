@@ -3,7 +3,7 @@ Python Client for Video Stitcher API
 
 |preview| |pypi| |versions|
 
-`Video Stitcher API`_: 
+`Video Stitcher API`_: allows you to manipulate video content to dynamically insert ads prior to delivery to client devices.
 
 - `Client Library Documentation`_
 - `Product Documentation`_
