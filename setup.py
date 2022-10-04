@@ -18,7 +18,7 @@ import os
 
 import setuptools  # type: ignore
 
-version = "0.3.0"
+version = "0.3.1"
 
 package_root = os.path.abspath(os.path.dirname(__file__))
 
@@ -31,7 +31,7 @@ setuptools.setup(
     author="Google LLC",
     author_email="googleapis-packages@google.com",
     license="Apache 2.0",
-    url="https://github.com/googleapis/python-google-cloud-video-stitcher",
+    url="https://github.com/googleapis/python-video-stitcher",
     version=version,
     long_description=readme,
     packages=setuptools.PEP420PackageFinder.find(),
@@ -41,7 +41,7 @@ setuptools.setup(
     install_requires=(
         "google-api-core[grpc] >= 1.33.1, <3.0.0dev,!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*",
         "proto-plus >= 1.22.0, <2.0.0dev",
-        "protobuf >= 3.20.1, <5.0.0dev",
+        "protobuf >= 3.20.2, <5.0.0dev",
     ),
     python_requires=">=3.7",
     classifiers=[
