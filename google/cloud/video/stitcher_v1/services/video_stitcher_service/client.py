@@ -61,7 +61,6 @@ from google.cloud.video.stitcher_v1.types import (
 from .transports.base import DEFAULT_CLIENT_INFO, VideoStitcherServiceTransport
 from .transports.grpc import VideoStitcherServiceGrpcTransport
 from .transports.grpc_asyncio import VideoStitcherServiceGrpcAsyncIOTransport
-from .transports.rest import VideoStitcherServiceRestTransport
 
 
 class VideoStitcherServiceClientMeta(type):
@@ -77,7 +76,6 @@ class VideoStitcherServiceClientMeta(type):
     )  # type: Dict[str, Type[VideoStitcherServiceTransport]]
     _transport_registry["grpc"] = VideoStitcherServiceGrpcTransport
     _transport_registry["grpc_asyncio"] = VideoStitcherServiceGrpcAsyncIOTransport
-    _transport_registry["rest"] = VideoStitcherServiceRestTransport
 
     def get_transport_class(
         cls,
@@ -446,7 +444,7 @@ class VideoStitcherServiceClient(metaclass=VideoStitcherServiceClientMeta):
         The API endpoint is determined in the following order:
         (1) if `client_options.api_endpoint` if provided, use the provided one.
         (2) if `GOOGLE_API_USE_CLIENT_CERTIFICATE` environment variable is "always", use the
-        default mTLS endpoint; if the environment variabel is "never", use the default API
+        default mTLS endpoint; if the environment variable is "never", use the default API
         endpoint; otherwise if client cert source exists, use the default mTLS endpoint, otherwise
         use the default API endpoint.
 
