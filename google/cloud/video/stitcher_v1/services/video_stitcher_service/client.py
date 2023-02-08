@@ -61,6 +61,7 @@ from google.cloud.video.stitcher_v1.types import (
 from .transports.base import DEFAULT_CLIENT_INFO, VideoStitcherServiceTransport
 from .transports.grpc import VideoStitcherServiceGrpcTransport
 from .transports.grpc_asyncio import VideoStitcherServiceGrpcAsyncIOTransport
+from .transports.rest import VideoStitcherServiceRestTransport
 
 
 class VideoStitcherServiceClientMeta(type):
@@ -76,6 +77,7 @@ class VideoStitcherServiceClientMeta(type):
     )  # type: Dict[str, Type[VideoStitcherServiceTransport]]
     _transport_registry["grpc"] = VideoStitcherServiceGrpcTransport
     _transport_registry["grpc_asyncio"] = VideoStitcherServiceGrpcAsyncIOTransport
+    _transport_registry["rest"] = VideoStitcherServiceRestTransport
 
     def get_transport_class(
         cls,
