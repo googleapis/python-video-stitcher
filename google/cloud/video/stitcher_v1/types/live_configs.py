@@ -17,18 +17,16 @@ from __future__ import annotations
 
 from typing import MutableMapping, MutableSequence
 
+from google.protobuf import duration_pb2  # type: ignore
 import proto  # type: ignore
 
-from google.protobuf import duration_pb2  # type: ignore
-
-
 __protobuf__ = proto.module(
-    package='google.cloud.video.stitcher.v1',
+    package="google.cloud.video.stitcher.v1",
     manifest={
-        'AdTracking',
-        'LiveConfig',
-        'PrefetchConfig',
-        'GamLiveConfig',
+        "AdTracking",
+        "LiveConfig",
+        "PrefetchConfig",
+        "GamLiveConfig",
     },
 )
 
@@ -94,6 +92,7 @@ class LiveConfig(proto.Message):
             specify a duration. The default value of this
             field is 30s.
     """
+
     class State(proto.Enum):
         r"""State of the live config.
 
@@ -143,20 +142,20 @@ class LiveConfig(proto.Message):
         proto.STRING,
         number=3,
     )
-    gam_live_config: 'GamLiveConfig' = proto.Field(
+    gam_live_config: "GamLiveConfig" = proto.Field(
         proto.MESSAGE,
         number=4,
-        message='GamLiveConfig',
+        message="GamLiveConfig",
     )
     state: State = proto.Field(
         proto.ENUM,
         number=5,
         enum=State,
     )
-    ad_tracking: 'AdTracking' = proto.Field(
+    ad_tracking: "AdTracking" = proto.Field(
         proto.ENUM,
         number=6,
-        enum='AdTracking',
+        enum="AdTracking",
     )
     default_slate: str = proto.Field(
         proto.STRING,
@@ -167,10 +166,10 @@ class LiveConfig(proto.Message):
         number=8,
         enum=StitchingPolicy,
     )
-    prefetch_config: 'PrefetchConfig' = proto.Field(
+    prefetch_config: "PrefetchConfig" = proto.Field(
         proto.MESSAGE,
         number=10,
-        message='PrefetchConfig',
+        message="PrefetchConfig",
     )
     default_ad_break_duration: duration_pb2.Duration = proto.Field(
         proto.MESSAGE,

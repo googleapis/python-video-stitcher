@@ -45,7 +45,11 @@ async def sample_create_cdn_key():
     )
 
     # Make the request
-    response = await client.create_cdn_key(request=request)
+    operation = client.create_cdn_key(request=request)
+
+    print("Waiting for operation to complete...")
+
+    response = (await operation).result()
 
     # Handle the response
     print(response)
