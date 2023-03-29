@@ -86,11 +86,6 @@ class LiveConfig(proto.Message):
             default is ``CUT_CURRENT``.
         prefetch_config (google.cloud.video.stitcher_v1.types.PrefetchConfig):
             The configuration for prefetching ads.
-        default_ad_break_duration (google.protobuf.duration_pb2.Duration):
-            The default ad pod duration in seconds that
-            will be requested when a cue-out does not
-            specify a duration. The default value of this
-            field is 30s.
     """
 
     class State(proto.Enum):
@@ -170,11 +165,6 @@ class LiveConfig(proto.Message):
         proto.MESSAGE,
         number=10,
         message="PrefetchConfig",
-    )
-    default_ad_break_duration: duration_pb2.Duration = proto.Field(
-        proto.MESSAGE,
-        number=11,
-        message=duration_pb2.Duration,
     )
 
 
