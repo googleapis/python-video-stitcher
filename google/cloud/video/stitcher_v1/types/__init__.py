@@ -72,7 +72,6 @@ from .video_stitcher_service import (
     ListVodAdTagDetailsResponse,
     ListVodStitchDetailsRequest,
     ListVodStitchDetailsResponse,
-    OperationMetadata,
     UpdateCdnKeyRequest,
     UpdateSlateRequest,
 )
@@ -138,7 +137,6 @@ __all__ = (
     "ListVodAdTagDetailsResponse",
     "ListVodStitchDetailsRequest",
     "ListVodStitchDetailsResponse",
-    "OperationMetadata",
     "UpdateCdnKeyRequest",
     "UpdateSlateRequest",
 )
