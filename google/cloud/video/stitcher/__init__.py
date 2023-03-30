@@ -96,6 +96,7 @@ from google.cloud.video.stitcher_v1.types.video_stitcher_service import (
     ListVodAdTagDetailsResponse,
     ListVodStitchDetailsRequest,
     ListVodStitchDetailsResponse,
+    OperationMetadata,
     UpdateCdnKeyRequest,
     UpdateSlateRequest,
 )
@@ -163,6 +164,7 @@ __all__ = (
     "ListVodAdTagDetailsResponse",
     "ListVodStitchDetailsRequest",
     "ListVodStitchDetailsResponse",
+    "OperationMetadata",
     "UpdateCdnKeyRequest",
     "UpdateSlateRequest",
 )

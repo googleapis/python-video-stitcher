@@ -48,7 +48,6 @@ except AttributeError:  # pragma: NO COVER
 
 from google.api_core import operation  # type: ignore
 from google.api_core import operation_async  # type: ignore
-from google.cloud.common import operation_metadata_pb2  # type: ignore
 from google.longrunning import operations_pb2
 from google.protobuf import empty_pb2  # type: ignore
 from google.protobuf import field_mask_pb2  # type: ignore
@@ -767,7 +766,7 @@ class VideoStitcherServiceClient(metaclass=VideoStitcherServiceClientMeta):
             response,
             self._transport.operations_client,
             cdn_keys.CdnKey,
-            metadata_type=operation_metadata_pb2.OperationMetadata,
+            metadata_type=video_stitcher_service.OperationMetadata,
         )
 
         # Done; return the response.
@@ -1118,7 +1117,7 @@ class VideoStitcherServiceClient(metaclass=VideoStitcherServiceClientMeta):
             response,
             self._transport.operations_client,
             empty_pb2.Empty,
-            metadata_type=operation_metadata_pb2.OperationMetadata,
+            metadata_type=video_stitcher_service.OperationMetadata,
         )
 
         # Done; return the response.
@@ -1250,7 +1249,7 @@ class VideoStitcherServiceClient(metaclass=VideoStitcherServiceClientMeta):
             response,
             self._transport.operations_client,
             cdn_keys.CdnKey,
-            metadata_type=operation_metadata_pb2.OperationMetadata,
+            metadata_type=video_stitcher_service.OperationMetadata,
         )
 
         # Done; return the response.
@@ -2298,7 +2297,7 @@ class VideoStitcherServiceClient(metaclass=VideoStitcherServiceClientMeta):
             response,
             self._transport.operations_client,
             slates.Slate,
-            metadata_type=operation_metadata_pb2.OperationMetadata,
+            metadata_type=video_stitcher_service.OperationMetadata,
         )
 
         # Done; return the response.
@@ -2646,7 +2645,7 @@ class VideoStitcherServiceClient(metaclass=VideoStitcherServiceClientMeta):
             response,
             self._transport.operations_client,
             slates.Slate,
-            metadata_type=operation_metadata_pb2.OperationMetadata,
+            metadata_type=video_stitcher_service.OperationMetadata,
         )
 
         # Done; return the response.
@@ -2773,7 +2772,7 @@ class VideoStitcherServiceClient(metaclass=VideoStitcherServiceClientMeta):
             response,
             self._transport.operations_client,
             empty_pb2.Empty,
-            metadata_type=operation_metadata_pb2.OperationMetadata,
+            metadata_type=video_stitcher_service.OperationMetadata,
         )
 
         # Done; return the response.
@@ -3147,7 +3146,7 @@ class VideoStitcherServiceClient(metaclass=VideoStitcherServiceClientMeta):
             response,
             self._transport.operations_client,
             live_configs.LiveConfig,
-            metadata_type=operation_metadata_pb2.OperationMetadata,
+            metadata_type=video_stitcher_service.OperationMetadata,
         )
 
         # Done; return the response.
@@ -3499,7 +3498,7 @@ class VideoStitcherServiceClient(metaclass=VideoStitcherServiceClientMeta):
             response,
             self._transport.operations_client,
             empty_pb2.Empty,
-            metadata_type=operation_metadata_pb2.OperationMetadata,
+            metadata_type=video_stitcher_service.OperationMetadata,
         )
 
         # Done; return the response.

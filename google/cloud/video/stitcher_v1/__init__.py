@@ -81,6 +81,7 @@ from .types.video_stitcher_service import (
     ListVodAdTagDetailsResponse,
     ListVodStitchDetailsRequest,
     ListVodStitchDetailsResponse,
+    OperationMetadata,
     UpdateCdnKeyRequest,
     UpdateSlateRequest,
 )
@@ -134,6 +135,7 @@ __all__ = (
     "LiveSession",
     "ManifestOptions",
     "MediaCdnKey",
+    "OperationMetadata",
     "PrefetchConfig",
     "ProgressEvent",
     "RenditionFilter",

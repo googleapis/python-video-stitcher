@@ -18,6 +18,7 @@ from __future__ import annotations
 from typing import MutableMapping, MutableSequence
 
 from google.protobuf import field_mask_pb2  # type: ignore
+from google.protobuf import timestamp_pb2  # type: ignore
 import proto  # type: ignore
 
 from google.cloud.video.stitcher_v1.types import live_configs as gcvs_live_configs
@@ -60,6 +61,7 @@ __protobuf__ = proto.module(
         "ListLiveConfigsResponse",
         "GetLiveConfigRequest",
         "DeleteLiveConfigRequest",
+        "OperationMetadata",
     },
 )
 
@@ -868,6 +870,41 @@ class DeleteLiveConfigRequest(proto.Message):
     name: str = proto.Field(
         proto.STRING,
         number=1,
+    )
+
+
+class OperationMetadata(proto.Message):
+    r"""Represents the metadata of the long-running operation.
+
+    Attributes:
+        create_time (google.protobuf.timestamp_pb2.Timestamp):
+            The time the operation was created.
+        end_time (google.protobuf.timestamp_pb2.Timestamp):
+            The time the operation finished running.
+        target (str):
+            Server-defined resource path for the target
+            of the operation.
+        verb (str):
+            Name of the verb executed by the operation.
+    """
+
+    create_time: timestamp_pb2.Timestamp = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message=timestamp_pb2.Timestamp,
+    )
+    end_time: timestamp_pb2.Timestamp = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message=timestamp_pb2.Timestamp,
+    )
+    target: str = proto.Field(
+        proto.STRING,
+        number=3,
+    )
+    verb: str = proto.Field(
+        proto.STRING,
+        number=4,
     )
 
 
