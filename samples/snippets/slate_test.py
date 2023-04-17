@@ -43,7 +43,6 @@ updated_slate_uri = (
 )
 
 
-@pytest.mark.skip()
 def test_slate_operations(capsys: pytest.fixture) -> None:
 
     utils.delete_stale_slates(project_id, location)
