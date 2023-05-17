@@ -3,7 +3,7 @@ from google.cloud.video.stitcher_v1.services.video_stitcher_service import (
 )
 from google.protobuf import timestamp_pb2
 
-seconds_per_hour = 60  # 3600
+seconds_per_hour = 3600
 
 
 def delete_stale_slates(project_id: str, location: str) -> None:
@@ -21,10 +21,13 @@ def delete_stale_slates(project_id: str, location: str) -> None:
     now.GetCurrentTime()
 
     for slate in response.slates:
-        # tmp = slate.name.split("-")
-        # creation_time_sec = int(tmp.pop())
-        # if (now.seconds - creation_time_sec) > (3 * seconds_per_hour):
-        response = client.delete_slate(name=slate.name)
+        tmp = slate.name.split("-")
+        try:
+            creation_time_sec = int(tmp.pop())
+        except ValueError:
+            continue
+        if (now.seconds - creation_time_sec) > (3 * seconds_per_hour):
+            response = client.delete_slate(name=slate.name)
 
 
 def delete_stale_cdn_keys(project_id: str, location: str) -> None:
@@ -42,10 +45,13 @@ def delete_stale_cdn_keys(project_id: str, location: str) -> None:
     now.GetCurrentTime()
 
     for cdn_key in response.cdn_keys:
-        # tmp = cdn_key.name.split("-")
-        # creation_time_sec = int(tmp.pop())
-        # if (now.seconds - creation_time_sec) > (3 * seconds_per_hour):
-        response = client.delete_cdn_key(name=cdn_key.name)
+        tmp = cdn_key.name.split("-")
+        try:
+            creation_time_sec = int(tmp.pop())
+        except ValueError:
+            continue
+        if (now.seconds - creation_time_sec) > (3 * seconds_per_hour):
+            response = client.delete_cdn_key(name=cdn_key.name)
 
 
 def delete_stale_live_configs(project_id: str, location: str) -> None:
@@ -63,7 +69,10 @@ def delete_stale_live_configs(project_id: str, location: str) -> None:
     now.GetCurrentTime()
 
     for live_config in response.live_configs:
-        # tmp = live_config.name.split("-")
-        # creation_time_sec = int(tmp.pop())
-        # if (now.seconds - creation_time_sec) > (3 * seconds_per_hour):
-        response = client.delete_live_config(name=live_config.name)
+        tmp = live_config.name.split("-")
+        try:
+            creation_time_sec = int(tmp.pop())
+        except ValueError:
+            continue
+        if (now.seconds - creation_time_sec) > (3 * seconds_per_hour):
+            response = client.delete_live_config(name=live_config.name)
