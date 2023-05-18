@@ -61,7 +61,7 @@ def create_cdn_key_akamai(
     operation = client.create_cdn_key(
         parent=parent, cdn_key_id=cdn_key_id, cdn_key=cdn_key
     )
-    response = operation.result(600)
+    response = operation.result()
     print(f"CDN key: {response.name}")
     return response
 

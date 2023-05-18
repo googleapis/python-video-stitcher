@@ -65,7 +65,7 @@ def create_live_config(
     operation = client.create_live_config(
         parent=parent, live_config_id=live_config_id, live_config=live_config
     )
-    response = operation.result(600)
+    response = operation.result()
     print(f"Live config: {response.name}")
     return response
 

@@ -40,7 +40,7 @@ def delete_live_config(project_id: str, location: str, live_config_id: str) -> s
 
     name = f"projects/{project_id}/locations/{location}/liveConfigs/{live_config_id}"
     operation = client.delete_live_config(name=name)
-    response = operation.result(600)
+    response = operation.result()
     print("Deleted live config")
     return response
 

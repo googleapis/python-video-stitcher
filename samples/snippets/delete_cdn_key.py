@@ -40,7 +40,7 @@ def delete_cdn_key(project_id: str, location: str, cdn_key_id: str) -> str:
 
     name = f"projects/{project_id}/locations/{location}/cdnKeys/{cdn_key_id}"
     operation = client.delete_cdn_key(name=name)
-    response = operation.result(600)
+    response = operation.result()
     print("Deleted CDN key")
     return response
 

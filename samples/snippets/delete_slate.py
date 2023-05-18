@@ -40,7 +40,7 @@ def delete_slate(project_id: str, location: str, slate_id: str) -> str:
 
     name = f"projects/{project_id}/locations/{location}/slates/{slate_id}"
     operation = client.delete_slate(name=name)
-    response = operation.result(600)
+    response = operation.result()
     print("Deleted slate")
     return response
 

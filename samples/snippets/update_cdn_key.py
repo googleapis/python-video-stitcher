@@ -79,7 +79,7 @@ def update_cdn_key(
         update_mask = field_mask.FieldMask(paths=["hostname", "media_cdn_key"])
 
     operation = client.update_cdn_key(cdn_key=cdn_key, update_mask=update_mask)
-    response = operation.result(600)
+    response = operation.result()
     print(f"Updated CDN key: {response.name}")
     return response
 
